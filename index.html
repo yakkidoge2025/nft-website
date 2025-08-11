@@ -3,155 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tibetan Dzi Beads NFT</title>
+<title>Tibetan Dzi Bead NFTs</title>
 <style>
-    body { font-family: Arial, sans-serif; margin: 0; background-color: #111; color: #f0f0f0; }
-    header { background: #222; padding: 15px 0; position: sticky; top: 0; z-index: 1000; }
-    nav { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: auto; padding: 0 20px; }
-    nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
-    nav ul li { margin: 0 10px; }
-    nav ul li a { text-decoration: none; color: #f0f0f0; font-weight: bold; }
-    nav ul li a:hover { color: #FFD700; }
-    .hamburger { display: none; flex-direction: column; cursor: pointer; }
-    .hamburger div { width: 25px; height: 3px; background: #f0f0f0; margin: 4px 0; }
-    @media (max-width: 768px) {
-        nav ul { display: none; flex-direction: column; background: #222; position: absolute; top: 60px; right: 20px; padding: 10px; border-radius: 8px; }
-        nav ul.show { display: flex; }
-        .hamburger { display: flex; }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #ddd;
+        line-height: 1.6;
     }
-    section { max-width: 1100px; margin: auto; padding: 40px 20px; }
-    h1, h2, h3 { color: #FFD700; }
-    p { line-height: 1.6; color: #ddd; }
-    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-    .gallery img { width: 100%; border-radius: 8px; cursor: pointer; }
-    .team, .celebrities { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-    .team-member, .celebrity { text-align: center; }
-    .team-member img, .celebrity img { width: 100%; border-radius: 8px; }
-    footer { background: #222; color: #999; padding: 20px; text-align: center; font-size: 14px; }
-    .lightbox { display: none; position: fixed; z-index: 1000; padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); }
-    .lightbox img { margin: auto; display: block; max-width: 90%; max-height: 80%; }
-    .lightbox:target { display: block; }
+    header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        background-color: #111;
+        padding: 20px;
+    }
+    header img {
+        max-width: 350px;
+        height: auto;
+        margin-right: 20px;
+    }
+    header .hero-text {
+        max-width: 600px;
+    }
+    h1, h2 {
+        color: #f5d76e;
+    }
+    nav {
+        background-color: #111;
+        padding: 10px;
+        text-align: center;
+    }
+    nav a {
+        color: #f5d76e;
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: bold;
+    }
+    nav a:hover {
+        text-decoration: underline;
+    }
+    section {
+        padding: 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+    .gallery, .celebs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    .gallery img, .celebs img {
+        width: 100%;
+        height: auto;
+        border: 2px solid #f5d76e;
+        border-radius: 5px;
+    }
+    footer {
+        background-color: #111;
+        color: #999;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    /* Mobile menu icon */
+    .menu-icon {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5em;
+        color: #f5d76e;
+    }
+    @media (max-width: 768px) {
+        nav a { display: none; }
+        .menu-icon { display: inline-block; }
+        nav.active a { display: block; margin: 10px 0; }
+    }
 </style>
+<script>
+    function toggleMenu() {
+        document.querySelector('nav').classList.toggle('active');
+    }
+</script>
 </head>
 <body>
 
+<!-- Navigation -->
+<nav>
+    <span class="menu-icon" onclick="toggleMenu()">☰</span>
+    <a href="#legend">Legend</a>
+    <a href="#symbolism">Symbolism</a>
+    <a href="#stories">Stories</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<!-- Hero Section -->
 <header>
-    <nav>
-        <div class="logo"><h1>Dzi NFT</h1></div>
-        <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('show')">
-            <div></div><div></div><div></div>
-        </div>
-        <ul>
-            <li><a href="#legend">Legend</a></li>
-            <li><a href="#symbolism">Symbolism</a></li>
-            <li><a href="#value">Value & Meaning</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#celebrities">Celebrities</a></li>
-        </ul>
-    </nav>
+    <img src="assets/dzi_opt_1.webp" alt="9-Eyed Dzi Bead NFT">
+    <div class="hero-text">
+        <h1>The 9-Eyed Dzi Bead NFT</h1>
+        <p>Steeped in legend and cherished for centuries, the 9-Eyed Dzi bead is believed to bring wealth, health, and protection to its owner. Now, for the first time, its power is reborn in the digital realm as a unique NFT.</p>
+    </div>
 </header>
 
+<!-- Legend Section -->
 <section id="legend">
-    <h2>Legend of the Nine-Eyed Dzi</h2>
-    <p>The Nine-Eyed Dzi is one of the most revered Tibetan talismans, symbolizing power, protection, and prosperity. Ancient legends tell of these beads falling from the skies, emerging from sacred rivers, or being discovered in hidden caves. Each bead carries centuries of mystery and spiritual energy, believed to bring good fortune to its holder.</p>
+    <h2>Legend of the 9-Eyed Dzi</h2>
+    <p>According to Tibetan lore, Dzi beads are “heaven’s pearls” — precious stones said to be gifts from the gods. The 9-eyed Dzi is the most coveted of all, representing the nine planetary systems and bringing ninefold blessings: compassion, glory, power, fame, removal of obstacles, protection, wealth, health, and longevity.</p>
 </section>
 
+<!-- Symbolism Section -->
 <section id="symbolism">
     <h2>Symbolism & Power</h2>
-    <p>Dzi beads have been cherished for their spiritual and energetic properties. In Tibetan culture, they are believed to act as protectors, amplifiers of intention, and vessels of positive energy. For centuries, they have been worn by monks, royalty, and adventurers seeking divine blessings.</p>
-</section>
-
-<section id="value">
-    <h2>Value & Meaning of Dzi</h2>
-    <p>Owning a <strong>Digital Dzi NFT</strong> means carrying the symbolic energy of the bead in the modern, digital realm. Each design reflects ancient beliefs:</p>
+    <p>Each Dzi pattern carries specific energies. Owning the digital twin of a Dzi means holding its essence in the blockchain — immutable, rare, and eternal.</p>
     <ul>
-        <li>1 Eye: Hope, wisdom, happiness</li>
-        <li>2 Eyes: Harmony, balanced relationships</li>
-        <li>3 Eyes: Luck, honor, longevity</li>
-        <li>4 Eyes: Protection from negativity</li>
-        <li>5 Eyes: Wish-granting</li>
-        <li>6 Eyes: Emotional balance</li>
-        <li>7 Eyes: Health, wealth, harmony</li>
-        <li>8 Eyes: Disaster protection</li>
-        <li>9 Eyes: Prosperity, protection</li>
-        <li>10–21 Eyes: Enhanced blessings</li>
+        <li><strong>1 Eye:</strong> Hope, wisdom, happiness</li>
+        <li><strong>2 Eyes:</strong> Harmony, balance of Yin & Yang</li>
+        <li><strong>3 Eyes:</strong> Luck, honor, longevity</li>
+        <li><strong>4 Eyes:</strong> Overcomes negative energies</li>
+        <li><strong>5 Eyes:</strong> Wish-fulfilling bead</li>
+        <li><strong>6 Eyes:</strong> Emotional balance</li>
+        <li><strong>7 Eyes:</strong> Health, wealth, relationships, longevity</li>
+        <li><strong>8 Eyes:</strong> Disaster protection</li>
+        <li><strong>9 Eyes:</strong> Prosperity, protection from harm</li>
+        <li><strong>10–21 Eyes:</strong> Added blessings such as wisdom, bravery, and success</li>
     </ul>
 </section>
 
+<!-- Stories Section -->
+<section id="stories">
+    <h2>Modern Stories & Mystique</h2>
+    <p>The Dzi bead’s influence reaches far beyond Tibet. Worn by celebrities, spiritual leaders, and adventurers, it is often credited with protection and luck. One famous tale recounts a survivor of the 1985 Nagoya plane crash who attributed his survival to his Dzi bead necklace.</p>
+</section>
+
+<!-- Celebrity Section -->
+<section>
+    <h2>Famous Wearers</h2>
+    <div class="celebs">
+        <img src="assets/Huang_Shengyi.jpg" alt="Huang Shengyi">
+        <img src="assets/jet_li.jpg" alt="Jet Li">
+        <img src="assets/Michael_Schumacher.jpg" alt="Michael Schumacher">
+        <img src="assets/Michelle_Yeoh.jpg" alt="Michelle Yeoh">
+        <img src="assets/queen_of_bhutan.jpg" alt="Queen of Bhutan">
+        <img src="assets/Reinhold_Messner.jpg" alt="Reinhold Messner">
+        <img src="assets/Sammo_Hung.jpg" alt="Sammo Hung">
+        <img src="assets/sting.jpg" alt="Sting">
+    </div>
+</section>
+
+<!-- Gallery Section -->
 <section id="gallery">
     <h2>Dzi NFT Gallery</h2>
     <div class="gallery">
-        <a href="#img1"><img src="assets/2_dzi.jpg" alt="Dzi 2"></a>
-        <a href="#img2"><img src="assets/3_dzi.jpg" alt="Dzi 3"></a>
-        <a href="#img3"><img src="assets/4_dzi.jpg" alt="Dzi 4"></a>
-        <a href="#img4"><img src="assets/6_dzi.jpg" alt="Dzi 6"></a>
-        <a href="#img5"><img src="assets/7_dzi.jpg" alt="Dzi 7"></a>
-        <a href="#img6"><img src="assets/8_dzi.jpg" alt="Dzi 8"></a>
-    </div>
-    <div id="img1" class="lightbox"><img src="assets/2_dzi.jpg"></div>
-    <div id="img2" class="lightbox"><img src="assets/3_dzi.jpg"></div>
-    <div id="img3" class="lightbox"><img src="assets/4_dzi.jpg"></div>
-    <div id="img4" class="lightbox"><img src="assets/6_dzi.jpg"></div>
-    <div id="img5" class="lightbox"><img src="assets/7_dzi.jpg"></div>
-    <div id="img6" class="lightbox"><img src="assets/8_dzi.jpg"></div>
-</section>
-
-<section id="team">
-    <h2>Our Team</h2>
-    <div class="team">
-        <div class="team-member">
-            <img src="assets/amina.jpg" alt="Amina">
-            <h3>Amina</h3>
-            <p>Creative Director – Bhutan</p>
-        </div>
-        <div class="team-member">
-            <img src="assets/lhamo.jpg" alt="Lhamo">
-            <h3>Lhamo</h3>
-            <p>Historical Research – Tibet</p>
-        </div>
-        <div class="team-member">
-            <img src="assets/mehra.jpg" alt="Mehra">
-            <h3>Mehra</h3>
-            <p>Blockchain Developer – Nepal</p>
-        </div>
-        <div class="team-member">
-            <img src="assets/sato.jpg" alt="Sato">
-            <h3>Sato</h3>
-            <p>Marketing Lead – Japan</p>
-        </div>
-        <div class="team-member">
-            <h3>Padma Raga</h3>
-            <p>France Center – Coordinator</p>
-        </div>
+        <img src="assets/2_dzi.jpg" alt="2-Eyed Dzi">
+        <img src="assets/3_dzi.jpg" alt="3-Eyed Dzi">
+        <img src="assets/4_dzi.jpg" alt="4-Eyed Dzi">
+        <img src="assets/6_dzi.jpg" alt="6-Eyed Dzi">
+        <img src="assets/7_dzi.jpg" alt="7-Eyed Dzi">
+        <img src="assets/8_dzi.jpg" alt="8-Eyed Dzi">
     </div>
 </section>
 
-<section id="celebrities">
-    <h2>Why Few Know, Many Desire</h2>
-    <div class="celebrities">
-        <div class="celebrity"><img src="assets/Huang_Shengyi.jpg" alt="Huang Shengyi"><p>Huang Shengyi</p></div>
-        <div class="celebrity"><img src="assets/jet_li.jpg" alt="Jet Li"><p>Jet Li</p></div>
-        <div class="celebrity"><img src="assets/Michael_Schumacher.jpg" alt="Michael Schumacher"><p>Michael Schumacher</p></div>
-        <div class="celebrity"><img src="assets/Michelle_Yeoh.jpg" alt="Michelle Yeoh"><p>Michelle Yeoh</p></div>
-        <div class="celebrity"><img src="assets/queen_of_bhutan.jpg" alt="Queen of Bhutan"><p>Queen of Bhutan</p></div>
-        <div class="celebrity"><img src="assets/Reinhold_Messner.jpg" alt="Reinhold Messner"><p>Reinhold Messner</p></div>
-        <div class="celebrity"><img src="assets/Sammo_Hung.jpg" alt="Sammo Hung"><p>Sammo Hung</p></div>
-        <div class="celebrity"><img src="assets/sting.jpg" alt="Sting"><p>Sting</p></div>
-    </div>
+<!-- Contact Section -->
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>For inquiries about the Tibetan Dzi NFT Collection, please email <a href="mailto:contact@yakkidoge.xyz" style="color:#f5d76e;">contact@yakkidoge.xyz</a></p>
 </section>
 
+<!-- Footer -->
 <footer>
-    <p>&copy; 2025 Tibetan Dzi Beads NFT Project. All Rights Reserved.</p>
+    &copy; 2025 Tibetan Dzi NFT Collection. All Rights Reserved.
 </footer>
-
-<script>
-    document.querySelectorAll('.gallery a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            if (!this.getAttribute('href').startsWith('#img')) e.preventDefault();
-        });
-    });
-</script>
 
 </body>
 </html>
