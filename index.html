@@ -6,55 +6,66 @@
   <title>Dzi Dynasty — NFT Gallery</title>
   <style>
     :root{
-      --bg:#000; --panel:#111; --text:#ddd; --muted:#999; --gold:#f5d76e; --border:rgba(245,215,110,.25);
+      --bg:#000;
+      --panel:#111;
+      --text:#ddd;
+      --muted:#999;
+      --gold:#f5d76e;
+      --border:rgba(245,215,110,.25);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);line-height:1.5}
-    a{color:var(--gold)}
+    html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--gold);text-decoration:none}
+    h1,h2,h3{color:var(--gold);margin:.25em 0 .5em}
+
+    /* NAV */
     nav{position:sticky;top:0;z-index:60;background:var(--panel);border-bottom:1px solid var(--border)}
-    .nav-inner{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{font-weight:800;color:var(--gold)}
     .links{display:flex;gap:14px;align-items:center}
-    .links a{text-decoration:none;font-weight:600}
+    .links a{padding:6px 0;font-weight:600}
     .menu-btn{display:none;background:transparent;border:0;font-size:24px;color:var(--gold);cursor:pointer}
     @media(max-width:768px){
       .menu-btn{display:inline-block}
       .links{display:none;flex-direction:column;align-items:flex-start;padding:10px 0;width:100%}
       nav.active .links{display:flex}
-      .links a{padding:8px 0;width:100%}
+      .links a{width:100%}
     }
 
     .container{max-width:1100px;margin:0 auto;padding:0 16px}
     header.hero{display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:center;padding:28px 0;border-bottom:1px solid var(--border)}
     header.hero img{width:100%;height:auto;border-radius:10px;border:2px solid var(--gold);display:block}
-    header.hero .cta a{display:inline-block;background:var(--gold);color:#000;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:800}
+    header.hero .cta a{display:inline-block;background:var(--gold);color:#000;padding:12px 18px;border-radius:8px;font-weight:800}
 
     @media(max-width:900px){
       header.hero{grid-template-columns:1fr;text-align:center}
-      header.hero .cta{display:grid;place-items:center}
       header.hero img{max-width:360px;margin:0 auto}
     }
 
     .section{padding:28px 0}
-    h1,h2,h3{color:var(--gold);margin:0 0 .5em}
     p{margin:.4em 0;color:var(--text)}
 
+    /* Celebs */
     .celebs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
     .celebrity{background:#0c0c0c;border:1px solid var(--border);padding:10px;border-radius:10px;text-align:center}
     .celebrity img{width:100%;height:160px;object-fit:cover;border-radius:8px;border:2px solid var(--gold)}
+    .celebrity p{margin:.6em 0 0;color:var(--gold);font-weight:700;font-size:14px}
 
     /* Branches */
     .branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
     .branch{background:#0c0c0c;border:1px solid var(--border);padding:14px;border-radius:12px}
+    .branch h3{margin:0 0 6px;display:flex;align-items:center;gap:8px;font-size:1.05rem}
+    .branch .flag{font-size:20px;line-height:1; /* help display color emoji on desktop where available */ font-family: "Segoe UI Emoji","Noto Color Emoji","Apple Color Emoji",sans-serif}
     .muted{color:var(--muted);font-size:14px}
 
-    /* Gallery */
+    /* Tabs + rails */
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
     .tab{background:#0c0c0c;color:var(--gold);border:1px solid var(--border);padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:700}
     .tab.active{background:var(--gold);color:#000}
 
     .rail-wrap{position:relative;margin-bottom:6px}
-    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch}
+    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
     .tile{background:#0c0c0c;border:1px solid var(--border);border-radius:12px;padding:8px;scroll-snap-align:start}
     .tile img{width:100%;height:220px;object-fit:cover;border-radius:8px;border:2px solid var(--gold);cursor:zoom-in;display:block}
 
@@ -63,6 +74,7 @@
     .rail-btn.right{right:-8px}
     @media(max-width:768px){.rail-btn{display:none}}
 
+    /* Lightbox */
     .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:120;padding:24px}
     .lightbox.open{display:flex}
     .lightbox img{max-width:92vw;max-height:80vh;border-radius:10px;border:2px solid var(--gold)}
@@ -72,94 +84,13 @@
 
     footer{padding:12px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border);background:var(--panel)}
   </style>
-  <script>
-    // helpers
-    const $=(s,r=document)=>r.querySelector(s);
-    const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
-
-    function toggleMenu(){ document.querySelector('nav').classList.toggle('active'); }
-
-    document.addEventListener('DOMContentLoaded',()=>{
-      // Tabs -> show/hide groups by id
-      const tabs = $$('.tab');
-      const groups = $$('.rail-group');
-      function activate(name){
-        tabs.forEach(t => {
-          const active = t.dataset.target===name;
-          t.classList.toggle('active', active);
-          t.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-        groups.forEach(g => g.hidden = g.id !== name);
-      }
-      tabs.forEach(t => t.addEventListener('click', ()=>activate(t.dataset.target)));
-      // default
-      activate('eye');
-
-      // Rail arrow buttons
-      $$('.rail-wrap').forEach(wrap=>{
-        const rail = $('.rail', wrap);
-        $('.rail-btn.left', wrap)?.addEventListener('click', ()=>{
-          rail.scrollBy({left: -Math.max(rail.clientWidth*0.8, 320), behavior: 'smooth'});
-        });
-        $('.rail-btn.right', wrap)?.addEventListener('click', ()=>{
-          rail.scrollBy({left: Math.max(rail.clientWidth*0.8, 320), behavior: 'smooth'});
-        });
-      });
-
-      // Lightbox logic
-      const lb = $('.lightbox');
-      const lbImg = $('.lightbox img');
-      const lbClose = $('.lightbox .close');
-      const btnPrev = $('#prev');
-      const btnNext = $('#next');
-      let activeList = [], idx = 0;
-
-      function openLightbox(list, startIdx){
-        activeList = list;
-        idx = startIdx || 0;
-        updateLB();
-        lb.classList.add('open');
-        // focus for keyboard
-        lb.setAttribute('tabindex','-1');
-        lb.focus();
-      }
-      function updateLB(){
-        if(!activeList.length) return;
-        const node = activeList[idx];
-        lbImg.src = node.dataset.full || node.src;
-        lbImg.alt = node.alt || '';
-      }
-      function step(delta){
-        if(!activeList.length) return;
-        idx = (idx + delta + activeList.length) % activeList.length;
-        updateLB();
-      }
-
-      // wire thumbnails
-      $$('.rail').forEach(rail=>{
-        const imgs = $$('img', rail);
-        imgs.forEach((img,i)=> img.addEventListener('click', ()=> openLightbox(imgs, i)));
-      });
-
-      lbClose.addEventListener('click', ()=> lb.classList.remove('open'));
-      lb.addEventListener('click', e=> { if(e.target === lb) lb.classList.remove('open'); });
-      if(btnPrev) btnPrev.addEventListener('click', ()=> step(-1));
-      if(btnNext) btnNext.addEventListener('click', ()=> step(1));
-
-      document.addEventListener('keydown', e=>{
-        if(!lb.classList.contains('open')) return;
-        if(e.key === 'Escape') lb.classList.remove('open');
-        if(e.key === 'ArrowLeft') step(-1);
-        if(e.key === 'ArrowRight') step(1);
-      });
-    });
-  </script>
 </head>
 <body>
-  <nav>
-    <div class="nav-inner container" role="navigation" aria-label="Main navigation">
+  <!-- NAV -->
+  <nav role="navigation" aria-label="Main navigation">
+    <div class="nav-inner container">
       <div class="brand">Dzi Dynasty</div>
-      <button class="menu-btn" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+      <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">☰</button>
       <div class="links" role="menu">
         <a href="#legend">Legend</a>
         <a href="#symbolism">Symbolism</a>
@@ -172,6 +103,7 @@
     </div>
   </nav>
 
+  <!-- HERO -->
   <header class="hero container">
     <img src="assets/dzi_opt_1.webp" alt="9-Eyed Dzi Bead NFT" loading="lazy">
     <div>
@@ -184,48 +116,77 @@
   </header>
 
   <main>
+    <!-- LEGEND -->
     <section id="legend" class="section container">
       <h2>The Legend &amp; Legacy of the Nine-Eyed Dzi</h2>
-      <p>From the misty highlands of Tibet comes a relic steeped in mystery, the Nine-Eyed Dzi. Some say it was a divine gift that fell from the heavens; others whisper it was crafted by the Serpent Kings.</p>
+      <p>From the misty highlands of Tibet comes a relic steeped in mystery, the Nine-Eyed Dzi. Some say it was a divine gift that fell from the heavens; others whisper it was crafted by the Serpent Kings, rulers of ancient subterranean realms. Nine eyes, each a portal of fortune, power, and spiritual clarity.</p>
     </section>
 
+    <!-- SYMBOLISM -->
     <section id="symbolism" class="section container">
       <h2>Symbolism &amp; Power</h2>
-      <p>The eyes represent blessings such as compassion, protection, health, wealth, longevity and wisdom.</p>
+      <p>The nine eyes represent the alignment of blessings: compassion, glory, protection, health, wealth, longevity, success, wisdom, and the clearing of karmic obstacles.</p>
       <ul>
-        <li><strong>1 Eye:</strong> Hope, wisdom</li>
-        <li><strong>2 Eyes:</strong> Harmony</li>
-        <li><strong>3 Eyes:</strong> Luck, longevity</li>
-        <li><strong>4 Eyes:</strong> Overcome negativity</li>
-        <li><strong>5 Eyes:</strong> Wish-fulfilling</li>
+        <li><strong>1 Eye:</strong> Hope, wisdom, happiness</li>
+        <li><strong>2 Eyes:</strong> Harmony, balance of Yin &amp; Yang</li>
+        <li><strong>3 Eyes:</strong> Luck, honor, longevity</li>
+        <li><strong>4 Eyes:</strong> Overcomes negative energies</li>
+        <li><strong>5 Eyes:</strong> Wish-fulfilling bead</li>
         <li><strong>6 Eyes:</strong> Emotional balance</li>
-        <li><strong>7 Eyes:</strong> Health &amp; relationships</li>
-        <li><strong>8 Eyes:</strong> Protection from disasters</li>
-        <li><strong>9 Eyes:</strong> Prosperity &amp; protection</li>
+        <li><strong>7 Eyes:</strong> Health, wealth, relationships, longevity</li>
+        <li><strong>8 Eyes:</strong> Disaster protection</li>
+        <li><strong>9 Eyes:</strong> Prosperity, protection from harm</li>
       </ul>
     </section>
 
+    <!-- STORIES -->
     <section id="stories" class="section container">
-      <h2>Modern Stories &amp; Mystique</h2>
-      <p>Collectors often tell legendary stories of survival and protection attributed to the Dzi beads.</p>
+      <h2>Modern Stories &amp; Mystique — The Nagoya Survivor’s Bead</h2>
+      <p>In the 1990s, a China Airlines jet tragically crashed in Nagoya, Japan. Amid the devastation, one passenger emerged almost unharmed, wearing a single Dzi bead. Collectors still speak of this as living proof of the relic’s mystical protection.</p>
     </section>
 
+    <!-- WHY FEW KNOW -->
     <section id="fewknow" class="section container">
-      <h2>Why So Few Know</h2>
-      <p>The Dzi has historically been a rare, regionally guarded object — never meant for mass distribution.</p>
+      <h2>Why So Few People Know About Dzi Beads</h2>
+      <p>Unlike diamonds or gold, the Dzi was never meant for the masses. It remained a secret among Himalayan highlanders and a handful of collectors, mystics, and monks.</p>
     </section>
 
+    <!-- CELEBRITIES -->
     <section class="section container">
       <h2>Famous Wearers</h2>
       <div class="celebs">
-        <div class="celebrity"><img src="assets/Huang_Shengyi.jpg" alt="Huang Shengyi" loading="lazy"></div>
-        <div class="celebrity"><img src="assets/jet_li.jpg" alt="Jet Li" loading="lazy"></div>
-        <div class="celebrity"><img src="assets/Michael_Schumacher.jpg" alt="Michael Schumacher" loading="lazy"></div>
-        <div class="celebrity"><img src="assets/Michelle_Yeoh.jpg" alt="Michelle Yeoh" loading="lazy"></div>
-        <div class="celebrity"><img src="assets/queen_of_bhutan.jpg" alt="Queen of Bhutan" loading="lazy"></div>
-        <div class="celebrity"><img src="assets/Reinhold_Messner.jpg" alt="Reinhold Messner" loading="lazy"></div>
-        <div class="celebrity"><img src="assets/Sammo_Hung.jpg" alt="Sammo Hung" loading="lazy"></div>
-        <div class="celebrity"><img src="assets/sting.jpg" alt="Sting" loading="lazy"></div>
+        <div class="celebrity">
+          <img src="assets/Huang_Shengyi.jpg" alt="Huang Shengyi" loading="lazy">
+          <p>Huang Shengyi</p>
+        </div>
+        <div class="celebrity">
+          <img src="assets/jet_li.jpg" alt="Jet Li" loading="lazy">
+          <p>Jet Li</p>
+        </div>
+        <div class="celebrity">
+          <img src="assets/Michael_Schumacher.jpg" alt="Michael Schumacher" loading="lazy">
+          <p>Michael Schumacher</p>
+        </div>
+        <div class="celebrity">
+          <img src="assets/Michelle_Yeoh.jpg" alt="Michelle Yeoh" loading="lazy">
+          <p>Michelle Yeoh</p>
+        </div>
+        <div class="celebrity">
+          <img src="assets/queen_of_bhutan.jpg" alt="Queen of Bhutan" loading="lazy">
+          <p>Queen of Bhutan</p>
+        </div>
+        <div class="celebrity">
+          <img src="assets/Reinhold_Messner.jpg" alt="Reinhold Messner" loading="lazy">
+          <p>Reinhold Messner</p>
+        </div>
+        <div class="celebrity">
+          <img src="assets/Sammo_Hung.jpg" alt="Sammo Hung" loading="lazy">
+          <p>Sammo Hung</p>
+        </div>
+        <div class="celebrity">
+          <img src="assets/sting.jpg" alt="Sting" loading="lazy">
+          <p>Sting</p>
+        </div>
       </div>
     </section>
 
@@ -233,10 +194,10 @@
     <section id="gallery" class="section container">
       <h2>Dzi NFT Gallery</h2>
 
-      <div class="tabs" role="tablist">
-        <button class="tab" data-target="eye" role="tab" aria-selected="false">Dzi Dynasty: Eye Series</button>
-        <button class="tab" data-target="geometric" role="tab" aria-selected="false">Dzi Dynasty: Geometric</button>
-        <button class="tab" data-target="amulet" role="tab" aria-selected="false">Dzi Dynasty: Amulet</button>
+      <div class="tabs" role="tablist" aria-label="Gallery categories">
+        <button class="tab" data-target="eye" role="tab" aria-selected="false" aria-controls="eye">Dzi Dynasty: Eye Series</button>
+        <button class="tab" data-target="geometric" role="tab" aria-selected="false" aria-controls="geometric">Dzi Dynasty: Geometric</button>
+        <button class="tab" data-target="amulet" role="tab" aria-selected="false" aria-controls="amulet">Dzi Dynasty: Amulet</button>
       </div>
 
       <!-- Eye Series -->
@@ -260,8 +221,8 @@
         <div class="rail-wrap">
           <button class="rail-btn left" aria-label="Scroll left">‹</button>
           <div class="rail" role="list">
-            <div class="tile" role="listitem"><img src="assets/minting800_1.jpg" alt="Geometric 1" data-full="assets/minting800_1.jpg" loading="lazy"></div>
-            <div class="tile" role="listitem"><img src="assets/minting800_2.jpg" alt="Geometric 2" data-full="assets/minting800_2.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/minting800_1.jpg" alt="Geometric pattern 1" data-full="assets/minting800_1.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/minting800_2.jpg" alt="Geometric pattern 2" data-full="assets/minting800_2.jpg" loading="lazy"></div>
             <div class="tile" role="listitem"><img src="assets/geometric_placeholder.jpg" alt="Geometric placeholder" data-full="assets/geometric_placeholder.jpg" loading="lazy"></div>
           </div>
           <button class="rail-btn right" aria-label="Scroll right">›</button>
@@ -286,22 +247,24 @@
     <!-- BRANCHES -->
     <section id="branches" class="section container">
       <h2>Global Branches</h2>
-      <p class="muted">We keep street addresses private. City / district only.</p>
+      <p class="muted">We keep addresses private. Here are our city &amp; district locations.</p>
       <div class="branches">
-        <div class="branch"><h3>🇫🇷 France — <em>Central Office</em></h3><p>Paris — 1er arrondissement</p></div>
-        <div class="branch"><h3>🇨🇭 Switzerland</h3><p>Zurich — Kreis 1</p></div>
-        <div class="branch"><h3>🇭🇰 Hong Kong</h3><p>Central &amp; Western District</p></div>
-        <div class="branch"><h3>🇸🇬 Singapore</h3><p>Orchard Planning Area</p></div>
-        <div class="branch"><h3>🇯🇵 Japan</h3><p>Tokyo — Minato City</p></div>
-        <div class="branch"><h3>🇺🇸 United States</h3><p>New York — Manhattan</p></div>
+        <div class="branch"><h3><span class="flag" role="img" aria-label="France flag">🇫🇷</span>France — <em>Central Office</em></h3><p>Paris — 1er arrondissement</p></div>
+        <div class="branch"><h3><span class="flag" role="img" aria-label="Switzerland flag">🇨🇭</span>Switzerland</h3><p>Zurich — Kreis 1</p></div>
+        <div class="branch"><h3><span class="flag" role="img" aria-label="Hong Kong flag">🇭🇰</span>Hong Kong</h3><p>Central &amp; Western District</p></div>
+        <div class="branch"><h3><span class="flag" role="img" aria-label="Singapore flag">🇸🇬</span>Singapore</h3><p>Orchard Planning Area</p></div>
+        <div class="branch"><h3><span class="flag" role="img" aria-label="Japan flag">🇯🇵</span>Japan</h3><p>Tokyo — Minato City</p></div>
+        <div class="branch"><h3><span class="flag" role="img" aria-label="United States flag">🇺🇸</span>United States</h3><p>New York — Manhattan</p></div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="section container">
-      <h2>Contact</h2>
-      <p>📧 <a href="mailto:contact@yakkidoge.xyz">contact@yakkidoge.xyz</a></p>
-      <p>🌐 nft.yakkidoge.xyz</p>
+      <h2>Contact Us</h2>
+      <p>Have a question? Want to own a piece of living legend?</p>
+      <p>📧 Email: <a href="mailto:contact@yakkidoge.xyz">contact@yakkidoge.xyz</a></p>
+      <p>🌐 Website: nft.yakkidoge.xyz</p>
+      <p>Follow the journey — the Nine-Eyed Dzi NFT bridges millennia of history with the boundless frontier of digital art.</p>
     </section>
   </main>
 
@@ -316,8 +279,102 @@
   </div>
 
   <footer>
-    &copy; 2025 Tibetan Dzi NFT Collection. All rights reserved.
+    &copy; 2025 Tibetan Dzi NFT Collection. All Rights Reserved.
   </footer>
+
+  <script>
+    // Helper selectors
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    // Mobile nav toggle with aria support
+    function toggleMenu(){
+      const nav = document.querySelector('nav');
+      nav.classList.toggle('active');
+      const expanded = nav.classList.contains('active');
+      const btn = document.querySelector('.menu-btn');
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tabs
+      const tabs = $$('.tab');
+      const groups = $$('.rail-group');
+      function activate(name){
+        tabs.forEach(t => {
+          const isActive = t.dataset.target === name;
+          t.classList.toggle('active', isActive);
+          t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        groups.forEach(g => {
+          g.hidden = g.id !== name;
+        });
+      }
+      tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.target)));
+      activate('eye'); // default
+
+      // Rail arrow buttons
+      $$('.rail-wrap').forEach(wrap => {
+        const rail = $('.rail', wrap);
+        $('.rail-btn.left', wrap)?.addEventListener('click', () => {
+          rail.scrollBy({ left: -Math.max(rail.clientWidth * 0.8, 320), behavior: 'smooth' });
+        });
+        $('.rail-btn.right', wrap)?.addEventListener('click', () => {
+          rail.scrollBy({ left: Math.max(rail.clientWidth * 0.8, 320), behavior: 'smooth' });
+        });
+      });
+
+      // Lightbox
+      const lb = $('.lightbox');
+      const lbImg = $('.lightbox img');
+      const lbClose = $('.lightbox .close');
+      const prevBtn = $('#prev');
+      const nextBtn = $('#next');
+      let activeList = [], idx = 0;
+
+      function openLightbox(list, startIdx){
+        activeList = list;
+        idx = startIdx || 0;
+        updateLB();
+        lb.classList.add('open');
+        lb.setAttribute('tabindex','-1');
+        lb.focus();
+      }
+      function updateLB(){
+        if(!activeList.length) return;
+        const node = activeList[idx];
+        lbImg.src = node.dataset.full || node.src;
+        lbImg.alt = node.alt || '';
+      }
+      function step(delta){
+        if(!activeList.length) return;
+        idx = (idx + delta + activeList.length) % activeList.length;
+        updateLB();
+      }
+
+      $$('.rail').forEach(rail => {
+        const imgs = $$('img', rail);
+        imgs.forEach((img, i) => img.addEventListener('click', () => openLightbox(imgs, i)));
+      });
+
+      lbClose.addEventListener('click', () => lb.classList.remove('open'));
+      lb.addEventListener('click', (e) => { if(e.target === lb) lb.classList.remove('open'); });
+      if(prevBtn) prevBtn.addEventListener('click', () => step(-1));
+      if(nextBtn) nextBtn.addEventListener('click', () => step(1));
+      document.addEventListener('keydown', (e) => {
+        if(!lb.classList.contains('open')) return;
+        if(e.key === 'Escape') lb.classList.remove('open');
+        if(e.key === 'ArrowLeft') step(-1);
+        if(e.key === 'ArrowRight') step(1);
+      });
+
+      // Close mobile menu after clicking any nav link (works on desktop too; harmless)
+      $$('.links a').forEach(link => link.addEventListener('click', () => {
+        const nav = document.querySelector('nav');
+        nav.classList.remove('active');
+        document.querySelector('.menu-btn').setAttribute('aria-expanded','false');
+      }));
+    });
+  </script>
 </body>
 </html>
-
