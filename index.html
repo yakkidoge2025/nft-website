@@ -1,306 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tibetan Dzi Bead NFTs</title>
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #000;
-        color: #ddd;
-        line-height: 1.6;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dzi Dynasty — NFT Gallery</title>
+  <style>
+    :root{
+      --bg:#000; --panel:#111; --text:#ddd; --muted:#999; --gold:#f5d76e; --border:rgba(245,215,110,.25);
     }
-    header {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        background-color: #111;
-        padding: 20px;
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);line-height:1.5}
+    a{color:var(--gold)}
+    nav{position:sticky;top:0;z-index:60;background:var(--panel);border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800;color:var(--gold)}
+    .links{display:flex;gap:14px;align-items:center}
+    .links a{text-decoration:none;font-weight:600}
+    .menu-btn{display:none;background:transparent;border:0;font-size:24px;color:var(--gold);cursor:pointer}
+    @media(max-width:768px){
+      .menu-btn{display:inline-block}
+      .links{display:none;flex-direction:column;align-items:flex-start;padding:10px 0;width:100%}
+      nav.active .links{display:flex}
+      .links a{padding:8px 0;width:100%}
     }
-    header img {
-        max-width: 350px;
-        height: auto;
-        margin-right: 20px;
-    }
-    header .hero-text {
-        max-width: 600px;
-    }
-    h1, h2 {
-        color: #f5d76e;
-    }
-    nav {
-        background-color: #111;
-        padding: 10px;
-        text-align: center;
-    }
-    nav a {
-        color: #f5d76e;
-        text-decoration: none;
-        margin: 0 10px;
-        font-weight: bold;
-    }
-    nav a:hover {
-        text-decoration: underline;
-    }
-    section {
-        padding: 20px;
-        max-width: 1000px;
-        margin: auto;
-    }
-    .gallery, .celebs {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-    }
-    .gallery img, .celebs img {
-        width: 100%;
-        height: auto;
-        border: 2px solid #f5d76e;
-        border-radius: 5px;
-        .team {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-.celebrity {
-    text-align: center;
-    max-width: 200px;
-}
 
-.celebrity img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    border: 2px solid #f5d76e;
-}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    header.hero{display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:center;padding:28px 0;border-bottom:1px solid var(--border)}
+    header.hero img{width:100%;height:auto;border-radius:10px;border:2px solid var(--gold);display:block}
+    header.hero .cta a{display:inline-block;background:var(--gold);color:#000;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:800}
 
-.celebrity p {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #f5d76e; /* same gold tone */
-    font-weight: bold;
-}
-
-/* Team layout: horizontal, responsive, with equal-size portraits */
-.team {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;               /* space between items */
-  margin-top: 10px;
-}
-
-.team > div {
-  flex: 0 0 200px;         /* fixed card width */
-  text-align: center;
-}
-
-.team img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;       /* crop to fill the square without stretching */
-  border-radius: 50%;      /* circular portraits — change to 8px if you prefer rounded rectangle */
-  border: 2px solid #f5d76e;
-  display: block;
-  margin: 0 auto;
-}
-
-    footer {
-        background-color: #111;
-        color: #999;
-        text-align: center;
-        padding: 10px;
-        font-size: 0.9em;
+    @media(max-width:900px){
+      header.hero{grid-template-columns:1fr;text-align:center}
+      header.hero .cta{display:grid;place-items:center}
+      header.hero img{max-width:360px;margin:0 auto}
     }
-    /* Mobile menu icon */
-    .menu-icon {
-        display: none;
-        cursor: pointer;
-        font-size: 1.5em;
-        color: #f5d76e;
-    }
-    @media (max-width: 768px) {
-        nav a { display: none; }
-        .menu-icon { display: inline-block; }
-        nav.active a { display: block; margin: 10px 0; }
-    }
-</style>
-<script>
-    function toggleMenu() {
-        document.querySelector('nav').classList.toggle('active');
-    }
-</script>
+
+    .section{padding:28px 0}
+    h1,h2,h3{color:var(--gold);margin:0 0 .5em}
+    p{margin:.4em 0;color:var(--text)}
+
+    .celebs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+    .celebrity{background:#0c0c0c;border:1px solid var(--border);padding:10px;border-radius:10px;text-align:center}
+    .celebrity img{width:100%;height:160px;object-fit:cover;border-radius:8px;border:2px solid var(--gold)}
+
+    /* Branches */
+    .branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .branch{background:#0c0c0c;border:1px solid var(--border);padding:14px;border-radius:12px}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Gallery */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+    .tab{background:#0c0c0c;color:var(--gold);border:1px solid var(--border);padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:700}
+    .tab.active{background:var(--gold);color:#000}
+
+    .rail-wrap{position:relative;margin-bottom:6px}
+    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch}
+    .tile{background:#0c0c0c;border:1px solid var(--border);border-radius:12px;padding:8px;scroll-snap-align:start}
+    .tile img{width:100%;height:220px;object-fit:cover;border-radius:8px;border:2px solid var(--gold);cursor:zoom-in;display:block}
+
+    .rail-btn{position:absolute;top:40%;transform:translateY(-50%);border:0;padding:8px 10px;font-size:22px;cursor:pointer;background:rgba(0,0,0,.6);color:var(--gold);border-radius:8px}
+    .rail-btn.left{left:-8px}
+    .rail-btn.right{right:-8px}
+    @media(max-width:768px){.rail-btn{display:none}}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:120;padding:24px}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:92vw;max-height:80vh;border-radius:10px;border:2px solid var(--gold)}
+    .lightbox .close{position:absolute;top:18px;right:18px;background:transparent;color:var(--gold);font-size:28px;border:0;cursor:pointer}
+    .lightbox .controls{position:absolute;bottom:24px;display:flex;gap:10px}
+    .lightbox button{background:var(--gold);color:#000;border:0;padding:10px 14px;border-radius:8px;font-weight:800;cursor:pointer}
+
+    footer{padding:12px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border);background:var(--panel)}
+  </style>
+  <script>
+    // helpers
+    const $=(s,r=document)=>r.querySelector(s);
+    const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+
+    function toggleMenu(){ document.querySelector('nav').classList.toggle('active'); }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      // Tabs -> show/hide groups by id
+      const tabs = $$('.tab');
+      const groups = $$('.rail-group');
+      function activate(name){
+        tabs.forEach(t => {
+          const active = t.dataset.target===name;
+          t.classList.toggle('active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        groups.forEach(g => g.hidden = g.id !== name);
+      }
+      tabs.forEach(t => t.addEventListener('click', ()=>activate(t.dataset.target)));
+      // default
+      activate('eye');
+
+      // Rail arrow buttons
+      $$('.rail-wrap').forEach(wrap=>{
+        const rail = $('.rail', wrap);
+        $('.rail-btn.left', wrap)?.addEventListener('click', ()=>{
+          rail.scrollBy({left: -Math.max(rail.clientWidth*0.8, 320), behavior: 'smooth'});
+        });
+        $('.rail-btn.right', wrap)?.addEventListener('click', ()=>{
+          rail.scrollBy({left: Math.max(rail.clientWidth*0.8, 320), behavior: 'smooth'});
+        });
+      });
+
+      // Lightbox logic
+      const lb = $('.lightbox');
+      const lbImg = $('.lightbox img');
+      const lbClose = $('.lightbox .close');
+      const btnPrev = $('#prev');
+      const btnNext = $('#next');
+      let activeList = [], idx = 0;
+
+      function openLightbox(list, startIdx){
+        activeList = list;
+        idx = startIdx || 0;
+        updateLB();
+        lb.classList.add('open');
+        // focus for keyboard
+        lb.setAttribute('tabindex','-1');
+        lb.focus();
+      }
+      function updateLB(){
+        if(!activeList.length) return;
+        const node = activeList[idx];
+        lbImg.src = node.dataset.full || node.src;
+        lbImg.alt = node.alt || '';
+      }
+      function step(delta){
+        if(!activeList.length) return;
+        idx = (idx + delta + activeList.length) % activeList.length;
+        updateLB();
+      }
+
+      // wire thumbnails
+      $$('.rail').forEach(rail=>{
+        const imgs = $$('img', rail);
+        imgs.forEach((img,i)=> img.addEventListener('click', ()=> openLightbox(imgs, i)));
+      });
+
+      lbClose.addEventListener('click', ()=> lb.classList.remove('open'));
+      lb.addEventListener('click', e=> { if(e.target === lb) lb.classList.remove('open'); });
+      if(btnPrev) btnPrev.addEventListener('click', ()=> step(-1));
+      if(btnNext) btnNext.addEventListener('click', ()=> step(1));
+
+      document.addEventListener('keydown', e=>{
+        if(!lb.classList.contains('open')) return;
+        if(e.key === 'Escape') lb.classList.remove('open');
+        if(e.key === 'ArrowLeft') step(-1);
+        if(e.key === 'ArrowRight') step(1);
+      });
+    });
+  </script>
 </head>
 <body>
-
-<!-- Navigation -->
-<nav>
-    <span class="menu-icon" onclick="toggleMenu()">☰</span>
-    <a href="#legend">Legend</a>
-    <a href="#symbolism">Symbolism</a>
-    <a href="#stories">Stories</a>
-    <a href="#fewknow">Why Few Know</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#team">Team</a>
-    <a href="#contact">Contact</a>
-</nav>
-
-<!-- Hero Section -->
-<header>
-    <img src="assets/dzi_opt_1.webp" alt="9-Eyed Dzi Bead NFT">
-    <div class="hero-text">
-        <h1>Forged in Mystery, Preserved in Ethereum</h1>
-        <p>The Nine-Eyed Dzi NFT bridges millennia of history with the limitless possibilities of the blockchain.</p>
-        <div style="text-align:center; margin: 20px 0;">
-  <a href="https://opensea.io/collection/nine-eyed-dzi-the-cosmic-relic" target="_blank" style="
-    display:inline-block;
-    background-color:#f5d76e;
-    color:#000;
-    padding:12px 20px;
-    border-radius:5px;
-    font-weight:bold;
-    text-decoration:none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;">
-    🔗 View on OpenSea
-  </a>
-</div>
-
-        
+  <nav>
+    <div class="nav-inner container" role="navigation" aria-label="Main navigation">
+      <div class="brand">Dzi Dynasty</div>
+      <button class="menu-btn" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+      <div class="links" role="menu">
+        <a href="#legend">Legend</a>
+        <a href="#symbolism">Symbolism</a>
+        <a href="#stories">Stories</a>
+        <a href="#fewknow">Why Few Know</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#branches">Branches</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
-</header>
+  </nav>
 
-<!-- Legend Section -->
-<section id="legend">
-    <h2>The Legend & Legacy of the Nine-Eyed Dzi</h2>
-    <p>From the misty highlands of Tibet comes a relic steeped in mystery, the Nine-Eyed Dzi. Some say it was a divine gift that fell from the heavens; others whisper it was crafted by the Serpent Kings, rulers of ancient subterranean realms.
-    Nine eyes, each a portal of fortune, power, and spiritual clarity. Worn by kings, monks, and warriors alike, this bead was not just an ornament, it was a shield against misfortune and a magnet for prosperity. For centuries, it passed silently between the hands of the chosen few.</p>
-   
-</section>
+  <header class="hero container">
+    <img src="assets/dzi_opt_1.webp" alt="9-Eyed Dzi Bead NFT" loading="lazy">
+    <div>
+      <h1>Forged in Mystery, Preserved in Ethereum</h1>
+      <p>The Nine-Eyed Dzi NFT bridges millennia of history with the limitless possibilities of the blockchain.</p>
+      <div class="cta" style="margin-top:12px;">
+        <a href="https://opensea.io/collection/nine-eyed-dzi-the-cosmic-relic" target="_blank" rel="noopener">🔗 View on OpenSea</a>
+      </div>
+    </div>
+  </header>
 
-<!-- Symbolism Section -->
-<section id="symbolism">
-    <h2>Symbolism & Power</h2>
-    <p>The nine eyes represent the supreme alignment of blessings: compassion, glory, protection, health, wealth, longevity, success, wisdom, and the clearing of karmic obstacles.
-    It is believed that a Nine-Eyed Dzi does not just accompany its owner, it works for them. In Tibetan lore, each eye awakens over time, amplifying the bead’s spiritual energy and forging an unbreakable connection between relic and keeper.</p>
-    
-    <p>Each Dzi pattern carries specific energies. Owning the digital twin of a Dzi means holding its essence in the blockchain-immutable, rare, and eternal.</p>
-    <ul>
-        <li><strong>1 Eye:</strong> Hope, wisdom, happiness</li>
-        <li><strong>2 Eyes:</strong> Harmony, balance of Yin & Yang</li>
-        <li><strong>3 Eyes:</strong> Luck, honor, longevity</li>
-        <li><strong>4 Eyes:</strong> Overcomes negative energies</li>
-        <li><strong>5 Eyes:</strong> Wish-fulfilling bead</li>
+  <main>
+    <section id="legend" class="section container">
+      <h2>The Legend &amp; Legacy of the Nine-Eyed Dzi</h2>
+      <p>From the misty highlands of Tibet comes a relic steeped in mystery, the Nine-Eyed Dzi. Some say it was a divine gift that fell from the heavens; others whisper it was crafted by the Serpent Kings.</p>
+    </section>
+
+    <section id="symbolism" class="section container">
+      <h2>Symbolism &amp; Power</h2>
+      <p>The eyes represent blessings such as compassion, protection, health, wealth, longevity and wisdom.</p>
+      <ul>
+        <li><strong>1 Eye:</strong> Hope, wisdom</li>
+        <li><strong>2 Eyes:</strong> Harmony</li>
+        <li><strong>3 Eyes:</strong> Luck, longevity</li>
+        <li><strong>4 Eyes:</strong> Overcome negativity</li>
+        <li><strong>5 Eyes:</strong> Wish-fulfilling</li>
         <li><strong>6 Eyes:</strong> Emotional balance</li>
-        <li><strong>7 Eyes:</strong> Health, wealth, relationships, longevity</li>
-        <li><strong>8 Eyes:</strong> Disaster protection</li>
-        <li><strong>9 Eyes:</strong> Prosperity, protection from harm</li>
-        <li><strong>10–21 Eyes:</strong> Added blessings such as wisdom, bravery, and success</li>
-    </ul>
-</section>
+        <li><strong>7 Eyes:</strong> Health &amp; relationships</li>
+        <li><strong>8 Eyes:</strong> Protection from disasters</li>
+        <li><strong>9 Eyes:</strong> Prosperity &amp; protection</li>
+      </ul>
+    </section>
 
-<!-- Stories Section -->
-<section id="stories">
-    
-    <h2>Modern Stories & Mystique — The Nagoya Survivor’s Bead</h2>
-    <p>In the 1990s, a China Airlines jet tragically crashed in Nagoya, Japan. Amid the devastation, one passenger emerged almost unharmed, wearing a single Dzi bead. To this day, collectors speak of the “Nagoya Survivor’s Bead” as living proof of the relic’s mystical protection.</p>
-    
+    <section id="stories" class="section container">
+      <h2>Modern Stories &amp; Mystique</h2>
+      <p>Collectors often tell legendary stories of survival and protection attributed to the Dzi beads.</p>
+    </section>
 
-<!-- Celebrity Section -->
-    <!-- Why Few Know -->
-<section id="fewknow">
-    
-    <h2>Why So Few People Know About Dzi Beads</h2>
-    <p>Unlike diamonds or gold, the Dzi was never meant for the masses. It is a secret known to Himalayan highlanders and a handful of collectors, mystics, and monks.
-    In modern times, a few lucky souls, including certain celebrities wear them quietly, never advertising their ownership, simply enjoying the silent influence of the bead. This silence is part of the mystery… and part of its power.</p>
-</section>
-<section>
-    <h2>Famous Wearers</h2>
-    <div class="celebs">
-        <img src="assets/Huang_Shengyi.jpg" alt="Huang Shengyi">
-          <p>Huang Shengyi</p>
-        <img src="assets/jet_li.jpg" alt="Jet Li">
-        <p>Jet Li</p>
-        <img src="assets/Michael_Schumacher.jpg" alt="Michael Schumacher">
-        <p>Michael Schumacher</p>
-        <img src="assets/Michelle_Yeoh.jpg" alt="Michelle Yeoh">
-        <p>Michelle Yeoh</p>
-        <img src="assets/queen_of_bhutan.jpg" alt="Queen of Bhutan">
-         <p>Queen of Bhutan</p>
-        <img src="assets/Reinhold_Messner.jpg" alt="Reinhold Messner">
-         <p>Reinhold Messner</p>
-        <img src="assets/Sammo_Hung.jpg" alt="Sammo Hung">
-        <p>Sammo Hung</p>
-        <img src="assets/sting.jpg" alt="Sting">
-        <p>Sting</p>
+    <section id="fewknow" class="section container">
+      <h2>Why So Few Know</h2>
+      <p>The Dzi has historically been a rare, regionally guarded object — never meant for mass distribution.</p>
+    </section>
+
+    <section class="section container">
+      <h2>Famous Wearers</h2>
+      <div class="celebs">
+        <div class="celebrity"><img src="assets/Huang_Shengyi.jpg" alt="Huang Shengyi" loading="lazy"></div>
+        <div class="celebrity"><img src="assets/jet_li.jpg" alt="Jet Li" loading="lazy"></div>
+        <div class="celebrity"><img src="assets/Michael_Schumacher.jpg" alt="Michael Schumacher" loading="lazy"></div>
+        <div class="celebrity"><img src="assets/Michelle_Yeoh.jpg" alt="Michelle Yeoh" loading="lazy"></div>
+        <div class="celebrity"><img src="assets/queen_of_bhutan.jpg" alt="Queen of Bhutan" loading="lazy"></div>
+        <div class="celebrity"><img src="assets/Reinhold_Messner.jpg" alt="Reinhold Messner" loading="lazy"></div>
+        <div class="celebrity"><img src="assets/Sammo_Hung.jpg" alt="Sammo Hung" loading="lazy"></div>
+        <div class="celebrity"><img src="assets/sting.jpg" alt="Sting" loading="lazy"></div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section container">
+      <h2>Dzi NFT Gallery</h2>
+
+      <div class="tabs" role="tablist">
+        <button class="tab" data-target="eye" role="tab" aria-selected="false">Dzi Dynasty: Eye Series</button>
+        <button class="tab" data-target="geometric" role="tab" aria-selected="false">Dzi Dynasty: Geometric</button>
+        <button class="tab" data-target="amulet" role="tab" aria-selected="false">Dzi Dynasty: Amulet</button>
+      </div>
+
+      <!-- Eye Series -->
+      <div id="eye" class="rail-group" aria-label="Eye Series">
+        <div class="rail-wrap">
+          <button class="rail-btn left" aria-label="Scroll left">‹</button>
+          <div class="rail" role="list">
+            <div class="tile" role="listitem"><img src="assets/2_dzi.jpg" alt="2-Eyed Dzi" data-full="assets/2_dzi.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/3_dzi.jpg" alt="3-Eyed Dzi" data-full="assets/3_dzi.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/4_dzi.jpg" alt="4-Eyed Dzi" data-full="assets/4_dzi.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/6_dzi.jpg" alt="6-Eyed Dzi" data-full="assets/6_dzi.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/dzi_7.jpg" alt="7-Eyed Dzi" data-full="assets/dzi_7.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/8_dzi.jpg" alt="8-Eyed Dzi" data-full="assets/8_dzi.jpg" loading="lazy"></div>
+          </div>
+          <button class="rail-btn right" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+
+      <!-- Geometric Series -->
+      <div id="geometric" class="rail-group" aria-label="Geometric" hidden>
+        <div class="rail-wrap">
+          <button class="rail-btn left" aria-label="Scroll left">‹</button>
+          <div class="rail" role="list">
+            <div class="tile" role="listitem"><img src="assets/minting800_1.jpg" alt="Geometric 1" data-full="assets/minting800_1.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/minting800_2.jpg" alt="Geometric 2" data-full="assets/minting800_2.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/geometric_placeholder.jpg" alt="Geometric placeholder" data-full="assets/geometric_placeholder.jpg" loading="lazy"></div>
+          </div>
+          <button class="rail-btn right" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+
+      <!-- Amulet Series -->
+      <div id="amulet" class="rail-group" aria-label="Amulet" hidden>
+        <div class="rail-wrap">
+          <button class="rail-btn left" aria-label="Scroll left">‹</button>
+          <div class="rail" role="list">
+            <div class="tile" role="listitem"><img src="assets/amulet_1.jpg" alt="Amulet 1" data-full="assets/amulet_1.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/amulet_2.jpg" alt="Amulet 2" data-full="assets/amulet_2.jpg" loading="lazy"></div>
+            <div class="tile" role="listitem"><img src="assets/amulet_placeholder.jpg" alt="Amulet placeholder" data-full="assets/amulet_placeholder.jpg" loading="lazy"></div>
+          </div>
+          <button class="rail-btn right" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BRANCHES -->
+    <section id="branches" class="section container">
+      <h2>Global Branches</h2>
+      <p class="muted">We keep street addresses private. City / district only.</p>
+      <div class="branches">
+        <div class="branch"><h3>🇫🇷 France — <em>Central Office</em></h3><p>Paris — 1er arrondissement</p></div>
+        <div class="branch"><h3>🇨🇭 Switzerland</h3><p>Zurich — Kreis 1</p></div>
+        <div class="branch"><h3>🇭🇰 Hong Kong</h3><p>Central &amp; Western District</p></div>
+        <div class="branch"><h3>🇸🇬 Singapore</h3><p>Orchard Planning Area</p></div>
+        <div class="branch"><h3>🇯🇵 Japan</h3><p>Tokyo — Minato City</p></div>
+        <div class="branch"><h3>🇺🇸 United States</h3><p>New York — Manhattan</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section container">
+      <h2>Contact</h2>
+      <p>📧 <a href="mailto:contact@yakkidoge.xyz">contact@yakkidoge.xyz</a></p>
+      <p>🌐 nft.yakkidoge.xyz</p>
+    </section>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" aria-label="Close">✕</button>
+    <img src="" alt="Expanded NFT image">
+    <div class="controls">
+      <button id="prev" aria-label="Previous">◀</button>
+      <button id="next" aria-label="Next">▶</button>
     </div>
-</section>
+  </div>
 
-<!-- Gallery Section -->
-<section id="gallery">
-    <h2>Dzi NFT Gallery</h2>
-    <div class="gallery">
-        <img src="assets/2_dzi.jpg" alt="2-Eyed Dzi">
-        <img src="assets/3_dzi.jpg" alt="3-Eyed Dzi">
-        <img src="assets/4_dzi.jpg" alt="4-Eyed Dzi">
-        <img src="assets/6_dzi.jpg" alt="6-Eyed Dzi">
-        <img src="assets/dzi_7.jpg" alt="7-Eyed Dzi">
-        <img src="assets/8_dzi.jpg" alt="8-Eyed Dzi">
-        <img src="assets/minting800_1.jpg" alt="Minting">
-        <img src="assets/minting800_2.jpg" alt="Minting2">
-    </div>
-    
-</section>
-    <section id="team">
-        
-    <h2>Our Team</h2>
-    <div class="team">
-        <div>
-            <img src="assets/amina.jpg" alt="Amina">
-            <h3>Amina</h3>
-            <p>Creative Director </p>
-        </div>
-        <div>
-            <img src="assets/lhamo.jpg" alt="Lhamo">
-            <h3>Lhamo</h3>
-            <p>Spiritual Advisor </p>
-        </div>
-        <div>
-            <img src="assets/mehra.jpg" alt="Mehra">
-            <h3>Mehra</h3>
-            <p>Web Developer </p>
-        </div>
-        <div>
-            <img src="assets/sato.jpg" alt="Sato">
-            <h3>Sato</h3>
-            <p>Blockchain Engineer </p>
-        </div>
-        <div>
-            <img src="assets/padma.jpg" alt="Padma">
-            <h3>Padma Raga</h3>
-            <p>France Center - Coordinator </p>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact">
-    <h2>Contact Us</h2>
-     <p>Have a question? Want to own a piece of living legend?</p>
-    <p>📧 Email: contact@yakkidoge.xyz</p>
-    <p>🌐 Website: nft.yakkidoge.xyz</p>
-    <p>Follow the journey-the Nine-Eyed Dzi NFT is here to bridge millennia of history with the boundless frontier of digital art.</p>
-    <p>For inquiries about the Tibetan Dzi NFT Collection, please email <a href="mailto:contact@yakkidoge.xyz" style="color:#f5d76e;">contact@yakkidoge.xyz</a></p>
-</section>
-
-<!-- Footer -->
-<footer>
-    &copy; 2025 Tibetan Dzi NFT Collection. All Rights Reserved.
-</footer>
-
+  <footer>
+    &copy; 2025 Tibetan Dzi NFT Collection. All rights reserved.
+  </footer>
 </body>
 </html>
+
